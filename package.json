@@ -1,36 +1,28 @@
 {
-  "name": "",
+  "name": "dynamic-masto-bot",
   "version": "1.0.0",
-  "description": "",
+  "description": "To make Masto account dynamic",
   "main": "index.js",
   "type": "module",
-  "license": "AGPL-version-3.0",
+  "license": "ISC",
   "private": false,
   "engines": {
     "node": ">= 14.0.0",
     "npm": ">= 6.0.0"
   },
-  "homepage": "",
+  "homepage": "https://github.com/sgitsp/dynamic-masto-bot",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "git+https://github.com/sgitsp/dynamic-masto-bot.git"
   },
-  "bugs": "",
+  "bugs": "https://github.com/sgitsp/dynamic-masto-bot/issues",
   "keywords": [],
-  "author": {
-    "name": "",
-    "email": "",
-    "url": ""
-  },
+  "author": "Sigit Purwadi",
   "contributors": [],
   "scripts": {
     "dev": "",
-    "test": ""
+    "test": "",
+    "start": "node index.js"
   },
-  "dependencies": {
-    "axios": "^1.2.5",
-    "dotenv": "^16.0.3",
-    "express": "^4.18.2",
-    "masto": "^5.7.0"
-  }
+  "devDependencies": {}
 }
