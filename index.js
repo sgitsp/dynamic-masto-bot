@@ -229,6 +229,7 @@ async function updateProfile(names) {
 
 async function drawBanner() {
   const [day, date, month, year, fullDate, fullTime, seconds] = currentTime();
+  const [hariMundur, jamMundur, menitMundur, detikMundur] = hitungMundur();
   const images = ['default.png', 'overlay.png', 'trackCover.png'];
   const promiseArray = [];
 
@@ -285,6 +286,7 @@ async function drawBanner() {
         alignmentY: Jimp.VERTICAL_ALIGN_BOTTOM
       }, 1500, 282);
       console.log(greeting);
+      console.log("Ramadhan is just " + hariMundur + " day(s) away");
       console.log('♫ ' + nowPlaying + ': "' + trackTitle + '" ' + 'by' + ' ' + trackArtist + ' ♫');
       banner.write('1500x500.png', function() {
         uploadBanner();
