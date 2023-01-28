@@ -54,7 +54,7 @@ async function nowPlaying() {
       // if nowplaying attr is undefined
       if (typeof attr === 'undefined') {
         nowPlaying = ("Recently Played");
-        updateProfile(["Ramadan is just " + hariMundur + " day(s) away", "Nobody Nearby"].random());
+        updateProfile(["Ramadan is just " + hariMundur + " day(s) away", "Nobody Nearby"].random(2));
       } else {
         nowPlaying = ("I'm curently listening to");
         updateProfile("NowPlaying: " + artist);
