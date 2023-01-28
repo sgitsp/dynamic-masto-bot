@@ -24,8 +24,10 @@ Array.prototype.random = function () {
 // Countdown function
 // Ramadan will be 23rd March 2023
 function hitungMundur() {
-  const menuju = new Date("Mar 23, 2023 18:00:00").getTime();
-  const sekarang = new Date().getTime();
+  const timezone = 7;
+  const menuju = new Date("Mar 23, 2023 18:00:00");
+  const today = new Date();
+  const sekarang = today.setUTCHours(today.getHours() + timezone);
   const selisih = menuju - sekarang;
   
   // 1000 mili detik = 1 detik , 60 detik = 1 menit , 60 menit = 1 jam , 24 jam  = 1 hari
