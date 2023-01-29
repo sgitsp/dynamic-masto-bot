@@ -16,6 +16,8 @@ const masto = await login({
   accessToken: process.env.TOKEN,
 });
 
+const account = await masto.v1.accounts.verifyCredentials();
+
 // Randomize function
 Array.prototype.random = function () {
   return this[Math.floor((Math.random()*this.length))];
@@ -202,6 +204,58 @@ let trimString = function(string, length) {
     string;
 };
 
+// Function to get recent folowers
+async function getLatestFollowers() {
+  const data = await masto.v1.accounts
+  .listFollowers(
+      account.id,
+          {
+              limit: 5,
+          }
+  );
+  console.log('Get 5 lastest followers...');
+
+  let count = 0;
+  const download = new Promise((resolve, reject) => {
+      data.forEach((data, index, arr) => {
+          downloadImage(data.avatar, `${index}.png`).then(() => {
+              count++;
+              if (count === arr.length) resolve();
+              console.log('Downloading avatar', `${index}.png..`)
+            });
+      })
+  })
+
+  download.then(() => {
+    downloadAlbumImage()
+  })
+}
+
+// Function to resize downloaded avatar
+async function downloadImage(url, image_path) {
+  await axios({
+    url,
+    responseType: 'arraybuffer',
+  }).then(
+    (response) =>
+      new Promise((resolve, reject) => {
+        resolve(sharp(response.data)
+          .grayscale()
+          .resize(96, 96)
+          .composite([{
+            input: circleShape,
+            blend: 'dest-in'
+          }])
+          .toFile(image_path));
+      })
+  );
+}
+
+// Function to crop image
+const width = 96, // avatar size
+  r = width / 2, // for circle avatar
+  circleShape = Buffer.from(`<svg><circle cx="${r}" cy="${r}" r="${r}" /></svg>`);
+
 // Update profile
 async function uploadBanner() {
   const base64 = new Blob([await fs.readFileSync('1500x500.png')]);
@@ -232,7 +286,7 @@ async function updateProfile(names) {
 async function drawBanner() {
   const [day, date, month, year, fullDate, fullTime, seconds] = currentTime();
   const [hariMundur, jamMundur, menitMundur, detikMundur] = hitungMundur();
-  const images = ['default.png', 'overlay.png', 'trackCover.png'];
+  const images = ['default.png', 'overlay.png', '0.png', '1.png', '2.png', '3.png', '4.png', 'trackCover.png'];
   const promiseArray = [];
 
   const dayFont = await Jimp.loadFont('fonts/Avigea/avigea-white-72.fnt');
@@ -249,8 +303,13 @@ async function drawBanner() {
   promiseArray.push(getRecentArtist());
 
   Promise.all(promiseArray).then(
-    ([banner, overlay, trackCover, greeting, nowPlaying, trackTitle, trackArtist]) => {
+    ([banner, overlay, ava0, ava1, ava2, ava3, ava4, trackCover, greeting, nowPlaying, trackTitle, trackArtist]) => {
       banner.composite(overlay, 0, 0);
+      banner.composite(ava0, 1032, 157);
+      banner.composite(ava1, 1154, 157);
+      banner.composite(ava2, 1274, 157);
+      banner.composite(ava3, 1099, 266);
+      banner.composite(ava4, 1215, 266);
       banner.composite(trackCover, 219, 145);
       banner.print(dayFont, 0, 58, {
         text: day, // Wednesday
@@ -300,11 +359,11 @@ async function drawBanner() {
 
 // Starter
 keepAlive(); // for uptimerobot webserver
-downloadAlbumImage();
+getLatestFollowers();
 
 // Set loop interval every millisec
 setInterval(() => {
-  downloadAlbumImage();
+  getLatestFollowers();
 }, 60000);
 
 
