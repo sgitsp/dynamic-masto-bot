@@ -71,7 +71,7 @@ async function greeting() {
   var today = new Date();
   today.setUTCHours(today.getHours() + timezone);
   const h = today.getHours();
-  const greetingTypes = ["Selamat pagi si paling morning person...", "GM to everyone except those who never say it back!", "Hi, my day is fine just afternoon here!", "Wish y'all a relaxing evening and later a good night~", "Y'all have a good night rest..", "Nighty night, tweethearts <3", "Lingsir wengi, wayahe demit do tangi~", "Wes jam telu, wayahe demit do turu~"];
+  const greetingTypes = ["Selamat pagi si paling morning person...", "GM to everyone except those who never say it back!", "Hi, my day is fine just afternoon here!", "Wish y'all a relaxing evening and later a good night~", "Y'all have a good night rest..", "Nighty night, why are you still up?", "Lingsir wengi, wayahe demit do tangi~", "Wes jam telu, wayahe demit do turu~"];
 
   if (h >= 3 && h < 4) { greetingText = greetingTypes[7]; } // Wes jam telu
   else if (h >= 4 && h < 6) { greetingText = greetingTypes[1]; } // si paling morning person
