@@ -155,7 +155,7 @@ async function downloadAlbumImage() {
           (response) =>
             new Promise((resolve, reject) => {
               resolve(sharp(response.data)
-                .grayscale()
+                //.grayscale()
                 .resize(albumWidth, albumWidth)
                 .composite([{
                   input: rect,
@@ -175,7 +175,7 @@ async function downloadAlbumImage() {
           (response) =>
             new Promise((resolve, reject) => {
               resolve(sharp(response.data)
-                .grayscale()
+                //.grayscale()
                 .resize(albumWidth, albumWidth)
                 .composite([{
                   input: rect,
@@ -331,12 +331,12 @@ async function drawBanner() {
         alignmentX: Jimp.HORIZONTAL_ALIGN_LEFT,
         alignmentY: Jimp.VERTICAL_ALIGN_TOP
       }, 1385, 416);
-      banner.print(trackTitleFont, -429, 87, {
+      banner.print(trackTitleFont, -429, 65, {
         text: trackTitle, // Grey Sky Morning
         alignmentX: Jimp.HORIZONTAL_ALIGN_CENTER,
         alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE
       }, 1424, 459);
-      banner.print(trackArtistFont, -429, 95, {
+      banner.print(trackArtistFont, -429, 73, {
         text: trackArtist, // Vertical Horizon
         alignmentX: Jimp.HORIZONTAL_ALIGN_CENTER,
         alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE
