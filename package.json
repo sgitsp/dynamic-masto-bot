@@ -20,8 +20,6 @@
   "author": "Sigit Purwadi",
   "contributors": [],
   "scripts": {
-    "dev": "",
-    "test": "",
     "start": "node index.js"
   },
   "dependencies": {
